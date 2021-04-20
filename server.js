@@ -1,23 +1,23 @@
-'use strict'
+'use strict';
 const express = require('express');
 const app = express();
 
 const cors = require('cors');
 const runner = require('./test-runner');
 
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
+//const bodyParser = require('body-parser');
+//app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
-})
+});
 
 app.use(express.static(__dirname + '/public'));
 
 app.get('/hello', function (req, res) {
   const name = req.query.name || 'Guest';
   res.type('txt').send('hello ' + name);
-})
+});
 
 const travellers = function (req, res) {
   let data = {};
@@ -55,7 +55,7 @@ const travellers = function (req, res) {
       default:
         data = {
           name: 'unknown'
-        }
+        };
     }
   }
   res.json(data);
@@ -67,12 +67,15 @@ app.route('/travellers')
 
 let error;
 app.get('/_api/get-tests', cors(), function (req, res, next) {
-  if (error)
+  if (error) {
     return res.json({ status: 'unavailable' });
+  }  
   next();
 },
   function (req, res, next) {
-    if (!runner.report) return next();
+    if (!runner.report) {
+      return next();
+    }
     res.json(testFilter(runner.report, req.query.type, req.query.n));
   },
   function (req, res) {
