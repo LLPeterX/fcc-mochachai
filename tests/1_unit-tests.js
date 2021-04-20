@@ -1,7 +1,7 @@
 const chai = require('chai');
 const assert = chai.assert;
-const suite = chai.suite;
-const test = chai.test;
+// const suite = chai.suite;
+// const test = chai.test;
 
 suite('Unit Tests', function () {
   suite('Basic Assertions', function () {
