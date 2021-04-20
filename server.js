@@ -21,6 +21,7 @@ app.get('/hello', function (req, res) {
 
 const travellers = function (req, res) {
   let data = {};
+  console.log('>>> SERVER REQ BODY=',req.body); // empty for PUT!
   if (req.body && req.body.surname) {
     switch (req.body.surname.toLowerCase()) {
       case 'polo':
