@@ -7,7 +7,7 @@ const runner = require('./test-runner');
 
 //const bodyParser = require('body-parser');
 //app.use(bodyParser.json());
-
+app.use(express.urlencoded({ extended: true}));
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
