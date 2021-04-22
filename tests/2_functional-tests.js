@@ -39,16 +39,16 @@ suite("Functional Tests", function () {
         .put("/travellers")
         .send({ surname: "Colombo" }) // send payload
         .end(function (err, res) {
-          console.log('>>>RES BODY =', res.body); // empty object :-()
-          assert.equal(res.status, 200, 'status must be 200'); // OK
-          assert.equal(res.type, 'application/json', 'reponse type must be json'); // OK
-          //assert.equal(res.body.name, 'Cristoforo', 'name must be "Cristoforo"'); // FAIL: undefined
-          //assert.equal(res.body.surname, 'Colombo', 'surname must be "Colombo"'); // FAIL: undefined
+          console.log('>>>RES BODY =', res.body); 
+          assert.equal(res.status, 200, 'status must be 200');
+          assert.equal(res.type, 'application/json', 'reponse type must be json');
+          assert.equal(res.body.name, 'Cristoforo', 'body.name must be "Cristoforo"');
+          assert.equal(res.body.surname, 'Colombo', 'body.surname must be "Colombo"');
           done();
         });
-    });
+    }); // test Colombo
 
-  });
+  }); // sute chai-http
   // #4
 
 //  test('send {surname: "da Verrazzano"}', function (done) {
@@ -56,14 +56,13 @@ suite("Functional Tests", function () {
 //    done();
 //  });
 
-//});
- 
+
 });
 
-/*
+
 const Browser = require("zombie");
 
-
+/*
 suite("Functional Tests with Zombie.js", function () {
 
   suite('"Famous Italian Explorers" form', function () {
@@ -75,6 +74,7 @@ suite("Functional Tests with Zombie.js", function () {
         done();
       });
     });
+    
     // #6
     test('submit "surname" : "Vespucci" - write your e2e test...', function (done) {
       assert.fail();
