@@ -39,7 +39,7 @@ suite("Functional Tests", function () {
         .put("/travellers")
         .send({ surname: "Colombo" }) // send payload
         .end(function (err, res) {
-          console.log('>>>RES BODY =', res.body); 
+          console.log('>>>RES BODY =', res.body);
           assert.equal(res.status, 200, 'status must be 200');
           assert.equal(res.type, 'application/json', 'reponse type must be json');
           assert.equal(res.body.name, 'Cristoforo', 'body.name must be "Cristoforo"');
@@ -51,16 +51,24 @@ suite("Functional Tests", function () {
   }); // sute chai-http
   // #4
 
-//  test('send {surname: "da Verrazzano"}', function (done) {
-//    assert.fail();
-//    done();
-//  });
+  test('send {surname: "da Verrazzano"}', function (done) {
+    chai.request(server)
+      .put("/travellers")
+      .send({ surname: "da Verrazzano" })
+      .end(function (err, res) {
+        assert.equal(res.status, 200, "status must be 200");
+        assert.equal(res.type, "application/json", "type must be json");
+        assert.equal(res.body.name, 'Giovanni', 'body.name must be "Giovanni"');
+        assert.equal(res.body.surname, 'da Verrazzano', 'body.surname must be "da Verrazzano"');
+        done();
+      });
+  }); // end test
 
-
-});
+}); // end chai-http tests
 
 
 const Browser = require("zombie");
+const { put } = require("../server");
 
 /*
 suite("Functional Tests with Zombie.js", function () {
@@ -74,7 +82,7 @@ suite("Functional Tests with Zombie.js", function () {
         done();
       });
     });
-    
+
     // #6
     test('submit "surname" : "Vespucci" - write your e2e test...', function (done) {
       assert.fail();
